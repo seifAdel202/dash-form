@@ -1,0 +1,66 @@
+<section class="form-background">
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" formControlName="name" placeholder="Enter your name" />
+    </div>
+    <div class="form-group">
+      <label for="titleHome">Title</label>
+      <input type="text" id="titleHome" formControlName="titleHome" placeholder="Enter your title" />
+    </div>
+    <div class="form-group">
+      <label for="pForTitle">Subtitle</label>
+      <input type="text" id="pForTitle" formControlName="pForTitle" placeholder="Enter your subtitle" />
+    </div>
+    <div class="form-group">
+      <label for="cvLink">CV Link</label>
+      <input type="url" id="cvLink" formControlName="cvLink" placeholder="Enter your CV link" />
+    </div>
+    <div class="form-group">
+      <label for="aboutMe">About Me</label>
+      <textarea id="aboutMe" formControlName="aboutMe" placeholder="Enter information about yourself"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="linkedInLink">LinkedIn Link</label>
+      <input type="url" id="linkedInLink" formControlName="linkedInLink" placeholder="Enter your LinkedIn link" />
+    </div>
+    
+    <div class="form-group">
+      <label for="softSkill">Soft Skills</label>
+      <input type="text" id="softSkill" formControlName="softSkill" placeholder="Enter your soft skills (comma-separated)" />
+    </div>
+    <div class="form-group">
+      <label for="techSkill">Technical Skills</label>
+      <input type="text" id="techSkill" formControlName="techSkill" placeholder="Enter your technical skills (comma-separated)" />
+    </div>
+
+
+    <div formArrayName="projects">
+      <div *ngFor="let project of projects().controls; let i = index" [formGroupName]="i">
+        <h3>Project {{ i + 1 }}</h3>
+        <div class="form-group">
+          <label for="projectTitle-{{i}}">Project Title</label>
+          <input type="text" id="projectTitle-{{i}}" formControlName="projectTitle" placeholder="Enter project title" />
+        </div>
+        <div class="form-group">
+          <label for="projectDescription-{{i}}">Project Description</label>
+          <textarea id="projectDescription-{{i}}" formControlName="projectDescription" placeholder="Enter project description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="projectImage-{{i}}">Project Image URL</label>
+          <input type="url" id="projectImage-{{i}}" formControlName="projectImage" placeholder="Enter project image URL" />
+        </div>
+        <div class="form-group">
+          <label for="projectLink-{{i}}">Project Link URL</label>
+          <input type="url" id="projectLink-{{i}}" formControlName="projectLink" placeholder="Enter project link URL" />
+        </div>
+        <button type="button" (click)="removeProject(i)">Remove Project</button>
+      </div>
+    </div>
+
+    <button class="aa" type="button" (click)="addProject()">Add Project</button>
+
+    <button type="submit" [disabled]="userForm.invalid">Submit</button>
+  </form>
+</section>
